@@ -66,7 +66,7 @@ async function exchangeCodeForToken(code) {
  * @param {string} token 
  */
 async function getRemoteUserInfo(token) {
-  console.log('HELLLLLO YAZZZZZZZZZZZZZZZZZZZZZAN',token);
+  console.log('HELLLLLO',token);
   let userResponse = await superagent
     .get(remoteAPI)
     .set('Authorization',` Bearer ${token}`);
