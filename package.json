@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/EsraaMamoun-401-advanced-javascript/lab-12-2#readme",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.0",
     "base-64": "^0.1.0",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
@@ -31,6 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.18",
     "morgan": "^1.10.0",
+    "node-mailjet": "^3.3.1",
     "superagent": "^5.2.2",
     "uuid": "^8.1.0"
   }
