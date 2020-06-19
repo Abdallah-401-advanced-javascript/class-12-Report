@@ -12,7 +12,8 @@
 * [submission PR](https://github.com/Abdallah-401-advanced-javascript/auth-server/pull/2)
 * [travis](https://github.com/Abdallah-401-advanced-javascript/auth-server/pull/2/checks?check_run_id=752039499)
 * [ci/cd](https://github.com/Abdallah-401-advanced-javascript/auth-server/pull/2/checks?check_run_id=752040894)
-
+https://testmylocalstuff.herokuapp.com/
+* [heroku](https://testmylocalstuff.herokuapp.com/)
 
 ### Documentation
 
@@ -30,7 +31,7 @@ This will make an authorization for the client from third-party.
 #### `.env` requirements 
 PORT=3000
 TOKEN_SERVER=https://www.linkedin.com/oauth/v2/accessToken
-REMOTE_API=https://api.linkedin.com/v2/jobs/
+REMOTE_API=https://api.linkedin.com/v2/me/
 CLIENT_ID=77wcte95rcnlli
 CLIENT_SECRET=9AaNf9bPnHW2bzyu
 API_SERVER=https://localhost:3000/oauth
