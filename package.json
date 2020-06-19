@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix --ext .js,.jsx .",
-    "start":"node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.18",
     "morgan": "^1.10.0",
-    "superagent": "^5.2.2"
+    "superagent": "^5.2.2",
+    "uuid": "^8.1.0"
   }
 }

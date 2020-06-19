@@ -3,6 +3,7 @@
 const superagent = require('superagent');
 const users = require('./users.js');
 console.log('hhhhhhhhhhhhhhhdsadsadddhhhhhh');
+const { v4: uuidv4 } = require('uuid');
 /*
   Resources
   https://developer.github.com/apps/building-oauth-apps/
@@ -26,7 +27,7 @@ module.exports = async  (req, res, next)=> {
     console.log('(2) ACCESS TOKEN:', remoteToken);
 
     let remoteUser = await getRemoteUserInfo(remoteToken);
-    console.log('(3) GITHUB USER', remoteUser);
+    console.log('(3) LinkedIn USER', remoteUser);
 
     let [user, token] = await getUser(remoteUser);
     req.user = user;
@@ -45,19 +46,19 @@ module.exports = async  (req, res, next)=> {
  * @param {string} code 
  */
 async function exchangeCodeForToken(code) {
-
-  let tokenResponse = await superagent.post(tokenServerUrl).send({
-    code: code,
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    redirect_uri: API_SERVER,
-    grant_type: 'authorization_code',
-  });
+  let tokenResponse = await superagent.post(tokenServerUrl)
+    .set('Content-Type','application/x-www-form-urlencoded')
+    .send({
+      code: code,
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      redirect_uri: API_SERVER,
+      grant_type: 'authorization_code',
+    });
 
   let access_token = tokenResponse.body.access_token;
-  console.log(access_token);
+  console.log('returned token',access_token);
   return access_token;
-
 }
 
 /**
@@ -65,16 +66,12 @@ async function exchangeCodeForToken(code) {
  * @param {string} token 
  */
 async function getRemoteUserInfo(token) {
+  console.log('HELLLLLO YAZZZZZZZZZZZZZZZZZZZZZAN',token);
   let userResponse = await superagent
     .get(remoteAPI)
-    .set('Authorization', `token ${token}`)
-    .set('user-agent', 'express-app');
-
-
+    .set('Authorization',` Bearer ${token}`);
   let user = userResponse.body;
-
   return user;
-
 }
 
 /**
@@ -82,12 +79,14 @@ async function getRemoteUserInfo(token) {
  * @param {obj} remoteUser 
  */
 async function getUser(remoteUser) {
+  let username= remoteUser.localizedFirstName+remoteUser.localizedLastName;
   let userRecord = {
-    username: remoteUser.login,
-    password: 'oauthpassword',
+    username: username,
+    password: uuidv4(),
   };
-  let user = await users.save(userRecord);
+  // let user = await users.save(userRecord);
+  users.userRecord = userRecord;
   let token = users.generateToken(userRecord);
-  return [user, token];
+  return [username, token];
 
 }
